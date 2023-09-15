@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockage de documents</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #drop-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        #file-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        #password-input {
+            margin-top: 20px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stockage de documents</h1>
+    <div>
+        <input type="password" id="password-input" placeholder="Entrez le mot de passe">
+    </div>
+    <div id="drop-area">
+        <p>Glissez et déposez des fichiers ici ou cliquez pour les sélectionner.</p>
+        <input type="file" id="file-input" multiple>
+        <ul id="file-list"></ul>
+    </div>
+
+    <script>
+        const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file-input');
+const fileList = document.getElementById('file-list');
+const passwordInput = document.getElementById('password-input');
+let storedFiles = [];
+
+// Add an event listener to the password input field
+passwordInput.addEventListener('input', (e) => {
+    const password = e.target.value;
+
+    if (password === 'votre_mot_de_passe_secret') {
+        // If the correct password is entered, show the stored files
+        displayStoredFiles();
+    } else {
+        // If the password is incorrect, clear the file list
+        fileList.innerHTML = '';
+    }
+});
+
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.classList.add('active');
+});
+
+dropArea.addEventListener('dragleave', () => {
+    dropArea.classList.remove('active');
+});
+
+dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.classList.remove('active');
+    const files = e.dataTransfer.files;
+    handleFiles(files);
+});
+
+fileInput.addEventListener('change', () => {
+    const files = fileInput.files;
+    handleFiles(files);
+});
+
+function handleFiles(files) {
+    storedFiles = [...files];
+    displayStoredFiles();
+}
+
+function displayStoredFiles() {
+    fileList.innerHTML = '';
+
+    for (const file of storedFiles) {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${file.name} (${formatBytes(file.size)})`;
+        fileList.appendChild(listItem);
+    }
+}
+
+function formatBytes(bytes) {
+    if (bytes === 0) return '0 Bytes';
+
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+    </script>
+</body>
+</html>

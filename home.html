@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modale Vanilla</title>
+    <link rel="stylesheet" href="home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="nav">
+        <button>-</button>
+        <input class="search" type="search" name="" placeholder="   search ...">
+    </div>
+    <div class="modal-container">
+
+      <div class="overlay modal-trigger"></div>
+     
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="dialogDesc">
+        <button 
+        aria-label="close modal"
+        class="close-modal modal-trigger">X</button>
+        <h1 id="modalTitle">Voici du Contenu</h1>
+        <p id="dialogDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut nam exercitationem nihil veritatis sapiente quia.</p>
+      </div>
+
+    </div>
+    <script src="home.js"></script>
+  </body>
+</html>
